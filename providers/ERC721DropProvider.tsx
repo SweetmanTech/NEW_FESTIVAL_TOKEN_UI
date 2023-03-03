@@ -17,7 +17,11 @@ import abi from '@lib/SYRYN-abi.json'
 
 export interface ERC721DropProviderState {
   purchase: (quantity: number) => Promise<ContractTransaction | undefined>
-  mint: (to: any, id: number, quantity: number) => Promise<ContractTransaction | undefined>
+  mint: (
+    to: any,
+    id: number,
+    quantity: number
+  ) => Promise<ContractTransaction | undefined>
   purchasePresale: (
     quantity: number,
     allowlistEntry?: AllowListEntry
@@ -37,7 +41,7 @@ export interface ERC721DropProviderState {
   revokeAdmin: (address: string | undefined) => Promise<boolean>
   isAdmin: (address: string | undefined) => Promise<boolean | undefined>
   withdraw: () => Promise<ContractTransaction | undefined>
-  correctNetwork?: boolean,
+  correctNetwork?: boolean
   chainId: number
 }
 
@@ -48,7 +52,7 @@ export const ERC721DropContext = React.createContext<ERC721DropProviderState>(
 function ERC721DropContractProvider({
   children,
   erc721DropAddress,
-  chainId
+  chainId,
 }: {
   erc721DropAddress: string
   children?: ReactNode
@@ -59,19 +63,17 @@ function ERC721DropContractProvider({
   const [userMintedCount, setUserMintedCount] = useState<number>()
   const [totalMinted, setTotalMinted] = useState<number>()
   const [saleDetails, setSaleDetails] = useState<EditionSaleDetails>()
-  const chain = allChains.find(
-    (chain) => chain.id == chainId
-  )
+  const chain = allChains.find((chain) => chain.id == chainId)
 
   const provider = getDefaultProvider(chain?.network, chainId)
   const correctNetwork = useMemo(
     () => (chainId || process.env.NEXT_PUBLIC_CHAIN_ID) == activeChain?.id.toString(),
     [activeChain, chainId]
   )
-  const drop = useMemo(
-    () => (new ethers.Contract(erc721DropAddress, abi, correctNetwork ? signer : provider)),
-    [signer, erc721DropAddress]
-  )
+  const drop = useMemo(() => {
+    console.log('erc721DropAddress', erc721DropAddress)
+    return new ethers.Contract(erc721DropAddress, abi, correctNetwork ? signer : provider)
+  }, [signer, erc721DropAddress])
 
   const purchase = useCallback(
     async (quantity: number) => {
@@ -86,12 +88,12 @@ function ERC721DropContractProvider({
 
   const mint = useCallback(
     async (address: any, id: number, quantity: number) => {
-      console.log("HELLO WORLD")
-      console.log("SIGNER", signer)
+      console.log('HELLO WORLD')
+      console.log('SIGNER', signer)
       if (!drop) return
-      console.log("HELLO WORLD PART 2")
-      const wei = ethers.utils.parseEther("0.05");
-      console.log("WEI", wei)
+      console.log('HELLO WORLD PART 2')
+      const wei = ethers.utils.parseEther('0.05')
+      console.log('WEI', wei)
       const tx = await drop.mint(address, id, quantity, {
         value: (wei as BigNumber).mul(BigNumber.from(quantity)),
       })
