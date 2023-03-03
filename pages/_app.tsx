@@ -17,7 +17,7 @@ const { chains, provider } = configureChains(
 )
 
 const { connectors } = getDefaultWallets({
-  appName: 'Syryn Records',
+  appName: process.env.NEXT_PUBLIC_TITLE,
   chains,
 })
 

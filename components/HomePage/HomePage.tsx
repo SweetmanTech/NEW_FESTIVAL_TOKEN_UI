@@ -22,16 +22,17 @@ const HomePage: NextPage<HomePageProps> = ({ collection, chainId }) => {
         style={{ backgroundColor: '#ceb435' }}
       >
         <div className="order-1 flex col-span-6 md:col-span-3 justify-center">
-          <img className="lg:max-w-lg" src="/images/syryn_records2.png" />
+          <img className="lg:max-w-lg" src="/images/Logo_new_festival_token.png" />
         </div>
         <div className="order-2 flex flex-col justify-end text-md md:text-2xl col-span-6 md:col-span-3 gap-5 pb-5">
           <p>
-            Syryn Records is a <span className="font-bold">youth-run record label</span>{' '}
-            serving young women and gender-expansive artists.
+            {process.env.NEXT_PUBLIC_TITLE} is a{' '}
+            <span className="font-bold">youth-run record label</span> serving young women
+            and gender-expansive artists.
           </p>
           <p>
             Women and non-binary professionals are underrepresented in the music industry
-            - We want to change that! Our mission as Syryn Records is to{' '}
+            - We want to change that! Our mission as {process.env.NEXT_PUBLIC_TITLE} is to{' '}
             <span className="italic font-bold">uplift</span> and{' '}
             <span className="italic font-bold">empower</span> youth interested in music
             industry professionals. We run yearly internships where our interns support
@@ -39,7 +40,7 @@ const HomePage: NextPage<HomePageProps> = ({ collection, chainId }) => {
           </p>
         </div>
         <div className="order-3 col-span-3 flex justify-center items-center">
-          <img className="lg:max-w-sm" src="/images/album_art2.png" />
+          <img className="lg:max-w-sm" src="/images/new_festival_token_500.png" />
         </div>
         <div className="order-4 flex flex-col justify-start text-md md:text-2xl col-span-3">
           <p className="pb-5">
@@ -50,8 +51,8 @@ const HomePage: NextPage<HomePageProps> = ({ collection, chainId }) => {
           <p>
             This year, we wanted to introduce our interns and artists to the incredible
             world of web3 and music NFTs! We are proud to introduce our genesis (aka
-            first!) music NFT - an audio player featuring our compilation record, Syryn
-            Records Vol. I!
+            first!) music NFT - an audio player featuring our compilation record,{' '}
+            {process.env.NEXT_PUBLIC_TITLE} Vol. I!
           </p>
         </div>
         <div className="order-6 grid justify-items-center	text-center lg:order-5 text-2xl col-span-6 lg:col-span-3">
