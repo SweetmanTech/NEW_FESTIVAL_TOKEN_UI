@@ -2,11 +2,10 @@ import { ipfsImage } from '@lib/helpers'
 import Head from 'next/head'
 
 const SeoHead = () => {
-  const title = 'Syryn Records Vol. I'
-  const description =
-    'Syryn Records is a youth-run record label serving young women and gender-expansive artists.'
+  const title = process.env.NEXT_PUBLIC_TITLE
+  const description = process.env.NEXT_PUBLIC_DESCRIPTION_TEXT
   const image =
-    'https://nftstorage.link/ipfs/bafybeiewx6ecp3gz3r6fczzvw5poa652bkwz3qtolpdsncg3quhhesu5rq'
+    'https://nftstorage.link/ipfs/bafybeieey2oiswv6274lx7khmmw24kwkbyfiss2vjtf6oeo6sj7cb4mn2q'
 
   return (
     <Head>

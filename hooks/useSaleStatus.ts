@@ -9,11 +9,11 @@ export function useSaleStatus({
   presale?: boolean
 }) {
   const startDate = presale
-    ? Number(collection.salesConfig.presaleStart) * 1000
-    : Number(collection.salesConfig.publicSaleStart) * 1000
+    ? Number(collection?.salesConfig?.presaleStart) * 1000
+    : Number(collection?.salesConfig?.publicSaleStart) * 1000
   const endDate = presale
-    ? Number(collection.salesConfig.presaleEnd) * 1000
-    : Number(collection.salesConfig.publicSaleEnd) * 1000
+    ? Number(collection?.salesConfig?.presaleEnd) * 1000
+    : Number(collection?.salesConfig?.publicSaleEnd) * 1000
 
   const isSoldOut = parseInt(collection.totalMinted) >= parseInt(collection.maxSupply)
 
@@ -23,12 +23,12 @@ export function useSaleStatus({
 
   const saleIsFinished = endDate < Date.now()
 
-  const presaleExists = collection.salesConfig.presaleMerkleRoot !== HashZero.toString()
+  const presaleExists = collection?.salesConfig?.presaleMerkleRoot !== HashZero.toString()
 
   const presaleIsActive =
     presaleExists &&
-    Number(collection.salesConfig.presaleStart) * 1000 <= Date.now() &&
-    Number(collection.salesConfig.presaleEnd) * 1000 > Date.now()
+    Number(collection?.salesConfig?.presaleStart) * 1000 <= Date.now() &&
+    Number(collection?.salesConfig?.presaleEnd) * 1000 > Date.now()
 
   return {
     startDate,

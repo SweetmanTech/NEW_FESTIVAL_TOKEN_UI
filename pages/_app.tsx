@@ -1,7 +1,7 @@
 import '@rainbow-me/rainbowkit/styles.css'
 import '@zoralabs/zord/index.css'
 import 'styles/global.css'
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 import 'degen/styles'
 
 import { getDefaultWallets, RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit'
@@ -9,19 +9,15 @@ import { configureChains, createClient, WagmiConfig, allChains } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
 import { ThemeProvider } from 'degen'
 import ERC721DropContractProvider from 'providers/ERC721DropProvider'
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify'
 
 const { chains, provider } = configureChains(
-  [
-    allChains.find(
-      (chain) => chain.id.toString() === process.env.NEXT_PUBLIC_CHAIN_ID
-    )
-  ],
-  [ publicProvider()]
+  [allChains.find((chain) => chain.id.toString() === process.env.NEXT_PUBLIC_CHAIN_ID)],
+  [publicProvider()]
 )
 
 const { connectors } = getDefaultWallets({
-  appName: 'Syryn Records',
+  appName: process.env.NEXT_PUBLIC_TITLE,
   chains,
 })
 
@@ -42,16 +38,14 @@ function App({ Component, pageProps }) {
             borderRadius: 'small',
           })}
         >
-          <link href="https://fonts.cdnfonts.com/css/cerebri-sans" rel="stylesheet"></link>
-          <ERC721DropContractProvider
-                erc721DropAddress={process.env.NEXT_PUBLIC_CONTRACT_ADDRESS}
-                chainId={parseInt(process.env.NEXT_PUBLIC_CHAIN_ID)}
-              >            
-              <Component {...pageProps} />
-          </ERC721DropContractProvider>
+          <link
+            href="https://fonts.cdnfonts.com/css/cerebri-sans"
+            rel="stylesheet"
+          ></link>
+          <Component {...pageProps} />
           <ToastContainer />
         </RainbowKitProvider>
-      </WagmiConfig>    
+      </WagmiConfig>
     </ThemeProvider>
   )
 }

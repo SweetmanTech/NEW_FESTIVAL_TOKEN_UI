@@ -15,24 +15,14 @@ export function MintDetails({
 }) {
   const { totalMinted } = useERC721DropContract()
   const { presaleExists } = useSaleStatus({ collection })
-  const maxPerWallet = parseInt(collection.salesConfig.maxSalePurchasePerAddress)
-
-  const startDate = useMemo(
-    () => new Date(Number(collection.salesConfig.publicSaleStart) * 1000),
-    [collection.salesConfig.publicSaleStart]
-  )
-  const endDate = useMemo(
-    () => new Date(Number(collection.salesConfig.publicSaleEnd) * 1000),
-    [collection.salesConfig.publicSaleEnd]
-  )
 
   const presaleStartDate = useMemo(
-    () => new Date(Number(collection.salesConfig.presaleStart) * 1000),
-    [collection.salesConfig.presaleStart]
+    () => new Date(Number(collection?.salesConfig?.presaleStart) * 1000),
+    [collection?.salesConfig?.presaleStart]
   )
   const presaleEndDate = useMemo(
-    () => new Date(Number(collection.salesConfig.presaleEnd) * 1000),
-    [collection.salesConfig.presaleEnd]
+    () => new Date(Number(collection?.salesConfig?.presaleEnd) * 1000),
+    [collection?.salesConfig?.presaleEnd]
   )
 
   // TODO: handle integer overflows for when we do open mints
@@ -71,7 +61,9 @@ export function MintDetails({
                 Presale start
               </Text>
               <Text variant="paragraph-sm" align="right">
-                {presaleStartDate.toLocaleString(...dateOptions as [string, Intl.DateTimeFormatOptions])}
+                {presaleStartDate.toLocaleString(
+                  ...(dateOptions as [string, Intl.DateTimeFormatOptions])
+                )}
               </Text>
             </Flex>
             <Flex gap="x2" justify="space-between">
@@ -80,7 +72,9 @@ export function MintDetails({
               </Text>
               <Text variant="paragraph-sm" align="right">
                 {!isNaN(presaleEndDate.getTime())
-                  ? presaleEndDate.toLocaleString(...dateOptions as [string, Intl.DateTimeFormatOptions])
+                  ? presaleEndDate.toLocaleString(
+                      ...(dateOptions as [string, Intl.DateTimeFormatOptions])
+                    )
                   : 'Never'}
               </Text>
             </Flex>
@@ -90,4 +84,3 @@ export function MintDetails({
     </Stack>
   )
 }
-

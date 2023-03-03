@@ -45,7 +45,7 @@ function SaleStatus({
 }) {
   const { data: account } = useAccount()
   const { switchNetwork } = useNetwork()
-  const {data: signer} = useSigner()
+  const { data: signer } = useSigner()
 
   const dropProvider = useERC721DropContract()
   const { chainId, correctNetwork } = useERC721DropContract()
@@ -58,10 +58,18 @@ function SaleStatus({
       collection,
       presale,
     })
-  
+
   const mint = async () => {
-    const contract = new ethers.Contract(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, abi, signer);
-    const tx = await contract.mint(account.address, 1, mintCounter, {value: (BigNumber.from(collection.salesConfig.publicSalePrice)).mul(mintCounter).toString()})
+    const contract = new ethers.Contract(
+      process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+      abi,
+      signer
+    )
+    const tx = await contract.mint(account.address, 1, mintCounter, {
+      value: BigNumber.from(collection.salesConfig.publicSalePrice)
+        .mul(mintCounter)
+        .toString(),
+    })
     return tx
   }
 
@@ -136,12 +144,20 @@ function SaleStatus({
                 : undefined
             }
             onClick={
-              !account ? openConnectModal : !correctNetwork ? () => switchNetwork?.(chainId) : handleMint
+              !account
+                ? openConnectModal
+                : !correctNetwork
+                ? () => switchNetwork?.(chainId)
+                : handleMint
             }
-            style={isMinted ? { backgroundColor: '#1CB687' } : {
-              backgroundColor: "#6dc4ca"
-            }}
-            className='fill-blue-500'
+            style={
+              isMinted
+                ? { backgroundColor: '#1CB687' }
+                : {
+                    backgroundColor: '#6dc4ca',
+                  }
+            }
+            className="fill-blue-500"
             disabled={
               isMinting ||
               awaitingApproval ||
@@ -211,12 +227,12 @@ export function MintStatus({
   const maxPerWallet = parseInt(
     presale
       ? allowlistEntry?.maxCount || '0'
-      : collection.salesConfig.maxSalePurchasePerAddress
+      : collection?.salesConfig?.maxSalePurchasePerAddress
   )
   const [isMinted, setIsMinted] = useState<boolean>(false)
   const [mintCounter, setMintCounter] = useState(1)
   const availableMints = maxPerWallet - (userMintedCount || 0)
-  const internalPrice = allowlistEntry?.price || collection.salesConfig.publicSalePrice
+  const internalPrice = allowlistEntry?.price || collection?.salesConfig?.publicSalePrice
 
   useEffect(() => {
     updateMintCounters()
@@ -331,4 +347,3 @@ export function MintStatus({
     </Stack>
   )
 }
-
