@@ -11,7 +11,7 @@ interface HomePageProps {
   chainId?: number
 }
 
-const HomePage: NextPage<HomePageProps> = ({ collection, chainId }) => {
+const HomePage: NextPage<HomePageProps> = ({ collection }) => {
   return (
     <>
       <SeoHead />
