@@ -5,8 +5,6 @@ import { SubgraphERC721Drop } from 'models/subgraph'
 import { MintStatus } from '@components/MintStatus'
 import { MintDetails } from '@components/MintDetails'
 import SeoHead from '@components/SeoHead'
-import { ipfsImage } from '@lib/helpers'
-import { border } from 'styles/styles.css'
 
 interface HomePageProps {
   collection: SubgraphERC721Drop
