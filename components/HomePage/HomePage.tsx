@@ -19,7 +19,7 @@ const HomePage: NextPage<HomePageProps> = ({ collection, chainId }) => {
       <SeoHead />
       <div
         className="font-body flex grid grid-cols-6 p-5 justify-center align-center bg-[url('/images/background_1800.png')] "
-        style={{ backgroundColor: '#ceb435' }}
+        style={{ backgroundColor: '#f105cd' }}
       >
         <div className="order-1 flex col-span-6 md:col-span-3 justify-center">
           <img className="lg:max-w-lg" src="/images/Logo_new_festival_token.png" />
