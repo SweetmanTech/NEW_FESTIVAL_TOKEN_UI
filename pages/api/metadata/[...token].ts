@@ -26,7 +26,7 @@ const validate = async (id: string, file: string) => {
       throw 'File missing'
     }
   } catch (e) {
-    console.log(e)
+    console.error(e)
     return false
   }
   return true
@@ -66,7 +66,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         })
       )
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
     let result = data.filter((x: any) => x !== null)
 

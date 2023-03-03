@@ -8,7 +8,6 @@ export function useSaleStatus({
   collection: SubgraphERC721Drop
   presale?: boolean
 }) {
-  console.log("collection", collection)
   const startDate = presale
     ? Number(collection?.salesConfig?.presaleStart) * 1000
     : Number(collection?.salesConfig?.publicSaleStart) * 1000

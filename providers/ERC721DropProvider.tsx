@@ -71,7 +71,6 @@ function ERC721DropContractProvider({
     [activeChain, chainId]
   )
   const drop = useMemo(() => {
-    console.log('erc721DropAddress', erc721DropAddress)
     return new ethers.Contract(erc721DropAddress, abi, correctNetwork ? signer : provider)
   }, [signer, erc721DropAddress])
 
@@ -88,12 +87,8 @@ function ERC721DropContractProvider({
 
   const mint = useCallback(
     async (address: any, id: number, quantity: number) => {
-      console.log('HELLO WORLD')
-      console.log('SIGNER', signer)
       if (!drop) return
-      console.log('HELLO WORLD PART 2')
       const wei = ethers.utils.parseEther('0.05')
-      console.log('WEI', wei)
       const tx = await drop.mint(address, id, quantity, {
         value: (wei as BigNumber).mul(BigNumber.from(quantity)),
       })
