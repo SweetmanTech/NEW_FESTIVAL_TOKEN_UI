@@ -87,9 +87,7 @@ const HomePage: NextPage<HomePageProps> = ({ collection, chainId }) => {
             >
               <iframe
                 className="h-[500px] sm:h-[800px]"
-                src={ipfsImage(
-                  'QmVYW5vHaV322Kvp2So5ErngP1PrDUneYqo4e9TNygAGSn?playlist-url=https://nftstorage.link/ipfs/bafkreibnkekukmhik5st3z32ejeh2fu7ge56qe5v5h67gadmz7yby33gba'
-                )}
+                src="https://cdn.warpsound.ai/ipfs/QmVYW5vHaV322Kvp2So5ErngP1PrDUneYqo4e9TNygAGSn?playlist-url=https://nftstorage.link/ipfs/bafkreibnkekukmhik5st3z32ejeh2fu7ge56qe5v5h67gadmz7yby33gba"
                 frameBorder="0"
               ></iframe>
             </Well>
