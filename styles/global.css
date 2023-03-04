@@ -27,3 +27,14 @@ a:hover {
 * {
   box-sizing: border-box;
 }
+
+button.xmint-btn span {
+  display: none;
+}
+button.xmint-btn:after {
+ content: "Comprar con Tarjeta de Credito";
+ color: white; 
+}
+button.xmint-btn {
+  background-color: #0f1bf8;
+}

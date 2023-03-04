@@ -38,16 +38,16 @@ const HomePage: NextPage<HomePageProps> = ({ collection }) => {
         <div className="order-6 grid justify-items-center text-white	text-center lg:order-5 text-2xl col-span-6 lg:col-span-3">
           <div className="flex flex-col gap-3">
             <p className="font-bold">Canciones del Reproductor</p>
-            <p>musico - cancion #1</p>
-            <p>musico - cancion #2</p>
-            <p>musico - cancion #3</p>
-            <p>musico - cancion #4</p>
-            <p>musico - cancion #5</p>
-            <p>musico - cancion #6</p>
-            <p>musico - cancion #7</p>
-            <p>musico - cancion #8</p>
-            <p>musico - cancion #9</p>
-            <p>musico - cancion #10</p>
+            <p>VETERANOS DEL PANICO - ASILO</p>
+            <p>VETERANOS DEL PANICO - EL DESIERTO</p>
+            <p>VETERANOS DEL PANICO - PERDIDO</p>
+            <p>VETERANOS DEL PANICO - SOMA</p>
+            <p>VETERANOS DEL PANICO - BARRO</p>
+            <p>VETERANOS DEL PANICO - VIENTO Y SAL</p>
+            <p>VETERANOS DEL PANICO - EL LADO OSCURO</p>
+            <p>VETERANOS DEL PANICO - EL CRUCE DE CAMINOS</p>
+            <p>VETERANOS DEL PANICO - SESSION 1</p>
+            <p>VETERANOS DEL PANICO - TAXI</p>
           </div>
         </div>
         <div className="my-5 order-5 lg:order-6 flex flex-col justify-start text-xs md:text-lg col-span-6 lg:col-span-3">
@@ -62,7 +62,7 @@ const HomePage: NextPage<HomePageProps> = ({ collection }) => {
             >
               <iframe
                 className="h-[500px] sm:h-[800px]"
-                src="https://cdn.warpsound.ai/ipfs/QmVYW5vHaV322Kvp2So5ErngP1PrDUneYqo4e9TNygAGSn?playlist-url=https://nftstorage.link/ipfs/bafkreibnkekukmhik5st3z32ejeh2fu7ge56qe5v5h67gadmz7yby33gba"
+                src={collection.editionMetadata.animationURI}
                 frameBorder="0"
               ></iframe>
             </Well>
