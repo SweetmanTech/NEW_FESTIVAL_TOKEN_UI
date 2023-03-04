@@ -12,6 +12,11 @@ interface HomePageProps {
 }
 
 const HomePage: NextPage<HomePageProps> = ({ collection }) => {
+  console.log('collection', collection)
+  console.log(
+    'collection.editionMetadata.animationURI',
+    collection.editionMetadata.animationURI
+  )
   return (
     <>
       <SeoHead />
@@ -62,7 +67,7 @@ const HomePage: NextPage<HomePageProps> = ({ collection }) => {
             >
               <iframe
                 className="h-[500px] sm:h-[800px]"
-                src="https://cdn.warpsound.ai/ipfs/QmVYW5vHaV322Kvp2So5ErngP1PrDUneYqo4e9TNygAGSn?playlist-url=https://nftstorage.link/ipfs/bafkreibnkekukmhik5st3z32ejeh2fu7ge56qe5v5h67gadmz7yby33gba"
+                src={collection.editionMetadata.animationURI}
                 frameBorder="0"
               ></iframe>
             </Well>

@@ -26,6 +26,7 @@ import { BigNumber, ethers } from 'ethers'
 import abi from '@lib/ERC721Drop-abi.json'
 import handleTxError from 'lib/handleTxError'
 import { CrossmintPayButton } from '@crossmint/client-sdk-react-ui'
+import axios from 'axios'
 
 function SaleStatus({
   collection,
@@ -254,12 +255,22 @@ export function MintStatus({
   const maxPerWallet = parsedMax === 0 ? 1000000 : parsedMax
   const [isMinted, setIsMinted] = useState<boolean>(false)
   const [mintCounter, setMintCounter] = useState(1)
+  const [maticPrice, setMaticPrice] = useState(0)
   const availableMints = maxPerWallet - (userMintedCount || 0)
   const internalPrice = allowlistEntry?.price || collection?.salesConfig?.publicSalePrice
 
   useEffect(() => {
     updateMintCounters()
   }, [updateMintCounters, isMinted])
+
+  useEffect(() => {
+    const getMaticPrice = async () => {
+      const { data: price } = await axios.get('/api/getMaticPrice')
+      console.log('price', price)
+      setMaticPrice(price.USD)
+    }
+    getMaticPrice()
+  }, [])
 
   function handleMintCounterUpdate(value: any) {
     setMintCounter(value)
@@ -290,7 +301,9 @@ export function MintStatus({
             <Heading size="sm" className={priceDateHeading}>
               {internalPrice === '0'
                 ? 'Free'
-                : `${formatCryptoVal(Number(internalPrice) * (mintCounter || 1))} ETH`}
+                : `$${formatCryptoVal(
+                    Number(internalPrice) * maticPrice * (mintCounter || 1)
+                  )}`}
             </Heading>
           </Stack>
 
