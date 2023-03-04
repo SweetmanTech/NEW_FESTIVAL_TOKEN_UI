@@ -57,7 +57,7 @@ function SaleStatus({
   const priceInEth = useMemo(
     () =>
       ethers.utils
-        .parseEther(collection.salesConfig.publicSalePrice.toString())
+        .formatEther(collection.salesConfig.publicSalePrice.toString())
         .toString(),
     [collection.salesConfig.publicSalePrice]
   )
@@ -256,6 +256,13 @@ export function MintStatus({
   const [maticPrice, setMaticPrice] = useState(0)
   const availableMints = maxPerWallet - (userMintedCount || 0)
   const internalPrice = allowlistEntry?.price || collection?.salesConfig?.publicSalePrice
+  const displayPrice = useMemo(
+    () =>
+      parseInt(
+        formatCryptoVal(Number(internalPrice) * maticPrice * (mintCounter || 1))
+      ).toFixed(2),
+    [internalPrice, mintCounter]
+  )
 
   useEffect(() => {
     updateMintCounters()
@@ -298,9 +305,7 @@ export function MintStatus({
             <Heading size="sm" className={priceDateHeading}>
               {internalPrice === '0'
                 ? 'Free'
-                : `$${formatCryptoVal(
-                    Number(internalPrice) * maticPrice * (mintCounter || 1)
-                  )}`}
+                : `$${displayPrice == 0 ? 0.01 * mintCounter : displayPrice}`}
             </Heading>
           </Stack>
 
