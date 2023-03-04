@@ -1,7 +1,8 @@
 import { ethers, utils } from 'ethers'
 import { GetStaticProps } from 'next'
 import { ipfsImage } from '@lib/helpers'
-import abi from '@lib/SYRYN-abi.json'
+import abi from '@lib/ERC721Drop-abi.json'
+import metadataAbi from '@lib/MetadataRenderer-abi.json'
 import metadataRendererAbi from '@lib/MetadataRenderer-abi.json'
 import getDefaultProvider from '@lib/getDefaultProvider'
 import { allChains } from 'wagmi'
@@ -28,14 +29,39 @@ export const getServerSideProps: GetStaticProps = async (context) => {
 
   // Get metadata renderer
   try {
-    const uri = await contract.uri(1)
+    const metadataRendererAddress = await contract.metadataRenderer()
+    const metadataRenderer = new ethers.Contract(
+      metadataRendererAddress,
+      metadataAbi,
+      provider
+    )
+
+    const base = await metadataRenderer.metadataBaseByContract(contractAddress.toString())
+    console.log('base', base)
+    console.log('base[0]', base[0])
+    console.log('base[0]', Object.keys(base))
+    console.log('base.base', base.base)
+
+    const uri = base.base
+    console.log('uri', uri)
     const metadataURI = ipfsImage(uri)
+    console.log('metadataURI', metadataURI)
+
     const axios = require('axios').default
     const { data: metadata } = await axios.get(metadataURI)
-    const price = await contract.cost()
-    const maxSalePurchasePerAddress = await contract.maxMintAmount()
-    const totalSupply = await contract.totalSupply(1)
-    const maxSupply = await contract.maxSupply(1)
+    console.log('metadata', metadata)
+
+    const salesConfig = await contract.salesConfig()
+    console.log('salesConfig', salesConfig)
+
+    const price = salesConfig.publicSalePrice
+    console.log('price', price)
+
+    const maxSalePurchasePerAddress = salesConfig.maxSalePurchasePerAddress
+    const totalSupply = await contract.totalSupply()
+    const config = await contract.config()
+    console.log('config', config)
+    const maxSupply = config.editionSize
 
     const erc721Drop = {
       id: 'string',

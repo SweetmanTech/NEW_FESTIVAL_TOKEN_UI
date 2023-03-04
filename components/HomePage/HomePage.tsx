@@ -12,6 +12,8 @@ interface HomePageProps {
 }
 
 const HomePage: NextPage<HomePageProps> = ({ collection }) => {
+  console.log('collection', collection)
+  console.log('collection', collection)
   return (
     <>
       <SeoHead />

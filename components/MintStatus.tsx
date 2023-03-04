@@ -23,7 +23,7 @@ import { CountdownTimer } from 'components/CountdownTimer'
 import { cleanErrors } from 'lib/errors'
 import { AllowListEntry } from 'lib/merkle-proof'
 import { BigNumber, ethers } from 'ethers'
-import abi from '@lib/SYRYN-abi.json'
+import abi from '@lib/ERC721Drop-abi.json'
 import handleTxError from 'lib/handleTxError'
 
 function SaleStatus({
@@ -65,7 +65,7 @@ function SaleStatus({
       abi,
       signer
     )
-    const tx = await contract.mint(account.address, 1, mintCounter, {
+    const tx = await contract.purchase(mintCounter, {
       value: BigNumber.from(collection.salesConfig.publicSalePrice)
         .mul(mintCounter)
         .toString(),
@@ -224,11 +224,12 @@ export function MintStatus({
     collection,
     presale,
   })
-  const maxPerWallet = parseInt(
+  const parsedMax = parseInt(
     presale
       ? allowlistEntry?.maxCount || '0'
       : collection?.salesConfig?.maxSalePurchasePerAddress
   )
+  const maxPerWallet = parsedMax === 0 ? 1000000 : parsedMax
   const [isMinted, setIsMinted] = useState<boolean>(false)
   const [mintCounter, setMintCounter] = useState(1)
   const availableMints = maxPerWallet - (userMintedCount || 0)
