@@ -57,7 +57,7 @@ function SaleStatus({
   const priceInEth = useMemo(
     () =>
       ethers.utils
-        .parseEther(collection.salesConfig.publicSalePrice.toString())
+        .formatEther(collection.salesConfig.publicSalePrice.toString())
         .toString(),
     [collection.salesConfig.publicSalePrice]
   )
