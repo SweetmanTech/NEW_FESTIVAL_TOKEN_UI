@@ -10,14 +10,14 @@ import {
   Stack,
   SpinnerOG,
 } from '@zoralabs/zord'
-import React, { useEffect, useCallback, useState } from 'react'
+import React, { useEffect, useCallback, useState, useMemo } from 'react'
 import { SubgraphERC721Drop } from 'models/subgraph'
 import { useERC721DropContract } from 'providers/ERC721DropProvider'
 import { useAccount, useNetwork, useSigner } from 'wagmi'
 import { formatCryptoVal } from 'lib/numbers'
 import { OPEN_EDITION_SIZE } from 'lib/constants'
 import { parseInt } from 'lodash'
-import { waitingApproval, priceDateHeading, mintCounterInput } from 'styles/styles.css'
+import { priceDateHeading, mintCounterInput } from 'styles/styles.css'
 import { useSaleStatus } from 'hooks/useSaleStatus'
 import { CountdownTimer } from 'components/CountdownTimer'
 import { cleanErrors } from 'lib/errors'
@@ -25,6 +25,7 @@ import { AllowListEntry } from 'lib/merkle-proof'
 import { BigNumber, ethers } from 'ethers'
 import abi from '@lib/ERC721Drop-abi.json'
 import handleTxError from 'lib/handleTxError'
+import { CrossmintPayButton } from '@crossmint/client-sdk-react-ui'
 
 function SaleStatus({
   collection,
@@ -52,6 +53,14 @@ function SaleStatus({
   const [awaitingApproval, setAwaitingApproval] = useState<boolean>(false)
   const [isMinting, setIsMinting] = useState<boolean>(false)
   const [errors, setErrors] = useState<string>()
+  const priceInEth = useMemo(
+    () =>
+      ethers.utils
+        .parseEther(collection.salesConfig.publicSalePrice.toString())
+        .toString(),
+    [collection.salesConfig.publicSalePrice]
+  )
+  console.log('priceInEth', priceInEth)
 
   const { startDate, endDate, isSoldOut, saleIsActive, saleNotStarted, saleIsFinished } =
     useSaleStatus({
@@ -128,6 +137,19 @@ function SaleStatus({
 
   return (
     <>
+      <CrossmintPayButton
+        clientId={process.env.NEXT_PUBLIC_CROSSMINT_CLIENT_ID}
+        environment="staging"
+        className="xmint-btn"
+        // mintTo={account as string}
+        mintConfig={{
+          type: 'erc-721',
+          totalPrice: priceInEth,
+          _quantity: 1,
+          // _to: account as string,
+          _target: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+        }}
+      />
       <ConnectButton.Custom>
         {({ openChainModal, openConnectModal }) => (
           <Button
@@ -154,10 +176,10 @@ function SaleStatus({
               isMinted
                 ? { backgroundColor: '#1CB687' }
                 : {
-                    backgroundColor: '#6dc4ca',
+                    backgroundColor: '#f105cd',
                   }
             }
-            className="fill-blue-500"
+            className="fill-blue-500 font-bold text-xl"
             disabled={
               isMinting ||
               awaitingApproval ||
@@ -168,17 +190,17 @@ function SaleStatus({
             {isMinting ? (
               <SpinnerOG />
             ) : !account ? (
-              'Connect wallet'
+              'Connectar billetera'
             ) : !correctNetwork ? (
-              'Wrong network'
+              'Red incorrecta'
             ) : awaitingApproval ? (
-              'Confirm in wallet'
+              'Confirmar en billetera'
             ) : isMinted ? (
               'Minted'
             ) : saleNotStarted ? (
-              'Not started'
+              'No empezado'
             ) : availableMints < 1 ? (
-              'Mint limit reached'
+              'Límite de menta alcanzado'
             ) : (
               'Mint'
             )}
