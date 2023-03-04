@@ -61,8 +61,6 @@ function SaleStatus({
         .toString(),
     [collection.salesConfig.publicSalePrice]
   )
-  console.log('priceInEth', priceInEth)
-
   const { startDate, endDate, isSoldOut, saleIsActive, saleNotStarted, saleIsFinished } =
     useSaleStatus({
       collection,
@@ -266,7 +264,6 @@ export function MintStatus({
   useEffect(() => {
     const getMaticPrice = async () => {
       const { data: price } = await axios.get('/api/getMaticPrice')
-      console.log('price', price)
       setMaticPrice(price.USD)
     }
     getMaticPrice()

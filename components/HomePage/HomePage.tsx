@@ -12,11 +12,6 @@ interface HomePageProps {
 }
 
 const HomePage: NextPage<HomePageProps> = ({ collection }) => {
-  console.log('collection', collection)
-  console.log(
-    'collection.editionMetadata.animationURI',
-    collection.editionMetadata.animationURI
-  )
   return (
     <>
       <SeoHead />
