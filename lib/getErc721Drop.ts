@@ -1,6 +1,5 @@
-const getErc721Drop = (contractAddress, metadata, price, maxSalePurchasePerAddress,totalSupply,maxSupply) => {
-
-    return {
+const getErc721Drop = (contractAddress, metadata, price, maxSalePurchasePerAddress,totalSupply,maxSupply) => ( 
+    {
         id: 'string',
         created: {
           id: 'string',
@@ -82,7 +81,7 @@ const getErc721Drop = (contractAddress, metadata, price, maxSalePurchasePerAddre
           block: 'string',
           timestamp: 'string',
         },
-      }
-}
+    }
+)
 
 export default getErc721Drop
