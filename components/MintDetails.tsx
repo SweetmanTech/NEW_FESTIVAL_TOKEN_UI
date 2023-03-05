@@ -39,7 +39,7 @@ export function MintDetails({
       <Stack gap="x3">
         <Flex gap="x3" justify="space-between">
           <Text variant="paragraph-sm" color="tertiary">
-            Number minted
+            Número vendido
           </Text>
           <Text variant="paragraph-sm">
             {formattedMintedCount}

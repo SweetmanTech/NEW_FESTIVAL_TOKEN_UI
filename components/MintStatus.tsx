@@ -301,7 +301,7 @@ export function MintStatus({
       {showPrice && !saleIsFinished && !isSoldOut && (
         <Flex gap="x3" flexChildren justify="space-between" align="flex-end" wrap="wrap">
           <Stack gap="x1" style={{ flex: 'none' }}>
-            <Eyebrow>Price</Eyebrow>
+            <Eyebrow>Precio</Eyebrow>
             <Heading size="sm" className={priceDateHeading}>
               {internalPrice === '0'
                 ? 'Free'
