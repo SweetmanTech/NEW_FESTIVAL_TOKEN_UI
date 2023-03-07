@@ -41,15 +41,57 @@ const HomePage: NextPage<HomePageProps> = ({ collection }) => {
         <div className="order-6 grid justify-items-center text-white	text-center lg:order-5 text-2xl col-span-6 lg:col-span-3">
           <div className="flex flex-col gap-3">
             <p className="font-bold">Canciones del Reproductor</p>
-            <p>FELLER FELLINI - MOTA</p>
-            <p>ETC ETC - MONTE FUJI</p>
-            <p>PACHO CANTIN - EL VUELO AZUL</p>
-            <p>SERES DE ARENA - LA TRAMPA</p>
-            <p>CURADO DE ESPANTO - POLVO</p>
-            <p>MAXI MEDIOTANO - DOMINGO</p>
-            <p>ALEJO ALARCON - ERA DE ACUARIO</p>
-            <p>OCTAVO COLOR - TEMA 1</p>
-            <p>VETERANOS DEL PANICO - ASILO</p>
+            <a
+              href="https://instagram.com/fellerfelliniok"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>FELLER FELLINI - MOTA</p>
+            </a>
+            <a href="https://instagram.com/etcetcduo" target="_blank" rel="noreferrer">
+              <p>ETC ETC - MONTE FUJI</p>
+            </a>
+            <a href="https://instagram.com/pachocantin" target="_blank" rel="noreferrer">
+              <p>PACHO CANTIN - EL VUELO AZUL</p>
+            </a>
+            <a
+              href="https://instagram.com/seres.de.arena.eth"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>SERES DE ARENA - LA TRAMPA</p>
+            </a>
+            <a
+              href="https://instagram.com/curadodeespanto"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>CURADO DE ESPANTO - POLVO</p>
+            </a>
+            <a
+              href="https://instagram.com/maxi_mediotano"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>MAXI MEDIOTANO - DOMINGO</p>
+            </a>
+            <a
+              href="https://instagram.com/alejoalarcon9"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>ALEJO ALARCON - ERA DE ACUARIO</p>
+            </a>
+            <a href="https://instagram.com/octavocolor" target="_blank" rel="noreferrer">
+              <p>OCTAVO COLOR - TEMA 1</p>
+            </a>
+            <a
+              href="https://instagram.com/veteranosdelpanico"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>VETERANOS DEL PANICO - ASILO</p>
+            </a>
           </div>
         </div>
         <div className="my-5 order-5 lg:order-6 flex flex-col justify-start text-xs md:text-lg col-span-6 lg:col-span-3">
