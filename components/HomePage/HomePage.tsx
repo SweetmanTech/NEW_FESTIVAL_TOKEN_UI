@@ -29,25 +29,69 @@ const HomePage: NextPage<HomePageProps> = ({ collection }) => {
         </div>
         <div className="order-3 col-span-3 flex justify-center items-center"></div>
         <div className="order-4 flex flex-col justify-start text-white text-md md:text-2xl col-span-3">
+          <p>
+            Creamos un <span className="font-bold">festival</span> de arte y tecnología
+            para artistas de todo el mundo!
+          </p>
           <p className="pb-5">
-            cada ano, creamos un <span className="font-bold">festival</span> para apoyar
-            nuestro musicos y nuestro eventos. Este ano, tenemos reproductores de musica
-            con 10 musicos argentinos.
+            En esta segunda edición, desarrollamos un reproductor NFT y una serie de obras
+            colectivas para apoyar a músicos y al proyecto.
           </p>
         </div>
         <div className="order-6 grid justify-items-center text-white	text-center lg:order-5 text-2xl col-span-6 lg:col-span-3">
           <div className="flex flex-col gap-3">
             <p className="font-bold">Canciones del Reproductor</p>
-            <p>VETERANOS DEL PANICO - ASILO</p>
-            <p>VETERANOS DEL PANICO - EL DESIERTO</p>
-            <p>VETERANOS DEL PANICO - PERDIDO</p>
-            <p>VETERANOS DEL PANICO - SOMA</p>
-            <p>VETERANOS DEL PANICO - BARRO</p>
-            <p>VETERANOS DEL PANICO - VIENTO Y SAL</p>
-            <p>VETERANOS DEL PANICO - EL LADO OSCURO</p>
-            <p>VETERANOS DEL PANICO - EL CRUCE DE CAMINOS</p>
-            <p>VETERANOS DEL PANICO - SESSION 1</p>
-            <p>VETERANOS DEL PANICO - TAXI</p>
+            <a
+              href="https://instagram.com/fellerfelliniok"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>FELLER FELLINI - MOTA</p>
+            </a>
+            <a href="https://instagram.com/etcetcduo" target="_blank" rel="noreferrer">
+              <p>ETC ETC - MONTE FUJI</p>
+            </a>
+            <a href="https://instagram.com/pachocantin" target="_blank" rel="noreferrer">
+              <p>PACHO CANTIN - EL VUELO AZUL</p>
+            </a>
+            <a
+              href="https://instagram.com/seres.de.arena.eth"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>SERES DE ARENA - LA TRAMPA</p>
+            </a>
+            <a
+              href="https://instagram.com/curadodeespanto"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>CURADO DE ESPANTO - POLVO</p>
+            </a>
+            <a
+              href="https://instagram.com/maxi_mediotano"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>MAXI MEDIOTANO - DOMINGO</p>
+            </a>
+            <a
+              href="https://instagram.com/alejoalarcon9"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>ALEJO ALARCON - ERA DE ACUARIO</p>
+            </a>
+            <a href="https://instagram.com/octavocolor" target="_blank" rel="noreferrer">
+              <p>OCTAVO COLOR - TEMA 1</p>
+            </a>
+            <a
+              href="https://instagram.com/veteranosdelpanico"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <p>VETERANOS DEL PANICO - ASILO</p>
+            </a>
           </div>
         </div>
         <div className="my-5 order-5 lg:order-6 flex flex-col justify-start text-xs md:text-lg col-span-6 lg:col-span-3">
@@ -62,7 +106,7 @@ const HomePage: NextPage<HomePageProps> = ({ collection }) => {
             >
               <iframe
                 className="h-[500px] sm:h-[800px]"
-                src={collection.editionMetadata.animationURI}
+                src="https://cdn.warpsound.ai/ipfs/QmVYW5vHaV322Kvp2So5ErngP1PrDUneYqo4e9TNygAGSn?playlist-url=https://nftstorage.link/ipfs/bafkreiez62ua6ifau3ghmbfo2mihrmtkdkp3bhhddmae6v64pfkhxtcrzy"
                 frameBorder="0"
               ></iframe>
             </Well>
