@@ -106,7 +106,7 @@ const HomePage: NextPage<HomePageProps> = ({ collection }) => {
             >
               <iframe
                 className="h-[500px] sm:h-[800px]"
-                src="https://cdn.warpsound.ai/ipfs/QmVYW5vHaV322Kvp2So5ErngP1PrDUneYqo4e9TNygAGSn?playlist-url=https://nftstorage.link/ipfs/bafkreiez62ua6ifau3ghmbfo2mihrmtkdkp3bhhddmae6v64pfkhxtcrzy"
+                src="https://cdn.warpsound.ai/ipfs/QmVYW5vHaV322Kvp2So5ErngP1PrDUneYqo4e9TNygAGSn?playlist-url=https://nftstorage.link/ipfs/bafkreihtzmq6y47l3cvsazwzgug542iq2nq76djyfupalucqgoza2wgol4"
                 frameBorder="0"
               ></iframe>
             </Well>
