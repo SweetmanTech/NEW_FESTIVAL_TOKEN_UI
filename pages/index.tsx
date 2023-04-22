@@ -1,11 +1,13 @@
 import { ethers, utils } from 'ethers'
 import { GetStaticProps } from 'next'
 import { ipfsImage } from '@lib/helpers'
-import abi from '@lib/SYRYN-abi.json'
+import abi from '@lib/ERC721Drop-abi.json'
+import metadataAbi from '@lib/MetadataRenderer-abi.json'
 import metadataRendererAbi from '@lib/MetadataRenderer-abi.json'
 import getDefaultProvider from '@lib/getDefaultProvider'
 import { allChains } from 'wagmi'
 import HomePage from '@components/HomePage/HomePage'
+import getErc721Drop from '@lib/getErc721Drop'
 
 const MintPage = ({ collection, chainId }) => (
   <HomePage collection={collection} chainId={chainId} />
@@ -28,98 +30,33 @@ export const getServerSideProps: GetStaticProps = async (context) => {
 
   // Get metadata renderer
   try {
-    const uri = await contract.uri(1)
+    const metadataRendererAddress = await contract.metadataRenderer()
+    const metadataRenderer = new ethers.Contract(
+      metadataRendererAddress,
+      metadataAbi,
+      provider
+    )
+    const base = await metadataRenderer.metadataBaseByContract(contractAddress.toString())
+    const uri = base.base
     const metadataURI = ipfsImage(uri)
     const axios = require('axios').default
     const { data: metadata } = await axios.get(metadataURI)
-    const price = await contract.cost()
-    const maxSalePurchasePerAddress = await contract.maxMintAmount()
-    const totalSupply = await contract.totalSupply(1)
-    const maxSupply = await contract.maxSupply(1)
 
-    const erc721Drop = {
-      id: 'string',
-      created: {
-        id: 'string',
-        block: 'string',
-        timestamp: 'string',
-      },
-      creator: 'string',
-      address: contractAddress,
-      name: metadata.name,
-      symbol: 'string',
-      contractConfig: {
-        metadataRenderer: 'string',
-        editionSize: 'string',
-        royaltyBPS: 'number',
-        fundsRecipient: 'string',
-      },
-      salesConfig: {
-        publicSalePrice: price.toString(),
-        maxSalePurchasePerAddress: maxSalePurchasePerAddress.toString(),
-        publicSaleStart: '0',
-        publicSaleEnd: '9223372036854775807',
-        presaleStart: '0',
-        presaleEnd: '0',
-        presaleMerkleRoot:
-          '0x0000000000000000000000000000000000000000000000000000000000000000',
-      },
-      salesConfigHistory: [
-        {
-          publicSalePrice: 'string',
-          maxSalePurchasePerAddress: 'string',
-          publicSaleStart: 'string',
-          publicSaleEnd: 'string',
-          presaleStart: 'string',
-          presaleEnd: 'string',
-          presaleMerkleRoot:
-            '0x0000000000000000000000000000000000000000000000000000000000000000',
-        },
-      ],
-      editionMetadata: {
-        id: 'string',
-        description: metadata.description,
-        imageURI: metadata.image,
-        contractURI: 'string',
-        animationURI: metadata.animation_url || '',
-        mimeType: metadata.mimeType || '',
-      },
-      sales: [
-        {
-          id: 'string',
-          pricePerToken: 'string',
-          priceTotal: 'string',
-          count: 'string',
-          purchaser: 'string',
-          firstPurchasedTokenId: 0,
-          txn: {
-            id: 'string',
-            block: 'string',
-            timestamp: 'string',
-          },
-        },
-      ],
-      transfers: [
-        {
-          id: 'string',
-          tokenId: 'string',
-          to: 'string',
-          from: 'string',
-          txn: {
-            id: 'string',
-            block: 'string',
-            timestamp: 'string',
-          },
-        },
-      ],
-      totalMinted: totalSupply.toString(),
-      maxSupply: maxSupply.toString(),
-      txn: {
-        id: 'string',
-        block: 'string',
-        timestamp: 'string',
-      },
-    }
+    const salesConfig = await contract.salesConfig()
+    const price = salesConfig.publicSalePrice
+    const maxSalePurchasePerAddress = salesConfig.maxSalePurchasePerAddress
+    const totalSupply = await contract.totalSupply()
+    const config = await contract.config()
+    const maxSupply = config.editionSize
+
+    const erc721Drop = getErc721Drop(
+      contractAddress,
+      metadata,
+      price,
+      maxSalePurchasePerAddress,
+      totalSupply,
+      maxSupply
+    )
 
     return {
       props: { collection: erc721Drop, chainId: chain.id },
